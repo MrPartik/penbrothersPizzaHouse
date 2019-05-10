@@ -224,7 +224,7 @@
     <!-- END #product -->
 
     <div class="modal fade in" id="cartReq" >
-        <div class="modal-dialog" style="width: 500px;">
+        <div class="modal-dialog" style="width: 350px;">
             <div class="modal-content" style="
     border-radius: 10px;
 ">
@@ -236,13 +236,13 @@
 
                     <div class="row" style="padding: 0px 20px 20px 20px;">
                         <br>
-                        <center class="col-md-6">
+                        <center class="col-md-12">
                             <div class="product-price">
                                 <div class="price">₱ <span id="total">0.00</span></div>
                             </div>
                         </center>
 
-                        <center class="col-md-6">
+                        <center class="col-md-12" style="margin-bottom: 35px;">
                             <div class="cart-qty-input">
                                 <a id=change href="#" class="qty-control left disabled" data-click="decrease-qty" data-target="#qty"><i class="fa fa-minus"></i></a>
                                 <input style="width: 100% !important;"  type="text" name="qty" value="1" min=1 class="form-control cart-qty " id="qty" />

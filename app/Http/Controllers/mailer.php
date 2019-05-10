@@ -55,13 +55,13 @@ class mailer extends Controller
         $order = t_order::where('o_id',$verify['o_id'])
             ->get();
         if($order->count()){
-            $orderUpdate = t_order::where('o_id',$verify['o_id'])
-                ->first();
-            $orderUpdate->o_verficationCode = $unique;
-            $orderUpdate->updated_at = Carbon::now();
-            $orderUpdate->save();
-            Session::put('verify',array('code'=>$unique,'o_id'=>$orderUpdate->o_id));
-            Mail::to($account["EMAIL"],$account["NAME"])->send(new confirmMailer());
+//            $orderUpdate = t_order::where('o_id',$verify['o_id'])
+//                ->first();
+//            $orderUpdate->o_verficationCode = $unique;
+//            $orderUpdate->updated_at = Carbon::now();
+//            $orderUpdate->save();
+//            Session::put('verify',array('code'=>$unique,'o_id'=>$orderUpdate->o_id));
+//            Mail::to($account["EMAIL"],$account["NAME"])->send(new confirmMailer());
 
         }else{
             $order = new t_order();
@@ -109,7 +109,7 @@ class mailer extends Controller
         }
 
 
-        return json_encode(array("success"=>    ""));
+        return json_encode(array("success"=>$order->count()));
     }
 
 }
