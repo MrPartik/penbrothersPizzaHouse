@@ -55,6 +55,26 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #b1273f;
         }
+
+
+
+        .loader {
+            position: relative;
+        }
+
+        .loader::after {
+            background-color: rgba(0,0,0,.7);
+            content: 'Loading...';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
     </style>
 </head>
 
@@ -151,7 +171,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-cart p-0">
                                     <div class="cart-header">
-                                        @if($cart);
+                                        @if($cart)
                                         @php
                                             foreach($cart as $id => $val){
                                                 $sum += $val['total'];
@@ -456,7 +476,7 @@
                     </div>
                     <div class="modal-body">
 
-                        <div class="row" style="padding: 0px 20px 20px 20px;height: 450px;overflow-y: auto;">
+                        <div class="row" style="padding: 0px 20px 0px 20px;max-height: 389px;overflow-y: auto;">
                             <br>
                             <center class="col-md-12">
                                 <div class="product-price">
@@ -661,6 +681,8 @@
         });
 
         $('button[id=btn_COD]').on('click',function(){
+
+            $('.modal-content').addClass('loader');
             $.ajax({
                 url:"{{url('checkVerify')}}"
                 ,type:"POST"
@@ -671,11 +693,13 @@
                 }
                 ,dataType:'json'
                 ,success: function(data){
-                   if(data.success==1){
+                   if(data.success=="1"){
                        alert("Your order has been verified, please wait for your pizza to arrive");
+                       $('.modal-content').removeClass('loader');
                    }else{
-
                        alert("Please confirm your verification code");
+                       $("#verify").val("");
+                       $('.modal-content').removeClass('loader');
                    }
 
                 },error: function(data){
@@ -706,6 +730,7 @@
             });
         });
         $('a[id=COD]').on('click',function(){
+            $('.modal-content').addClass('loader');
             $.ajax({
                url:"{{url('verify')}}"
                 ,type:"POST"
@@ -715,7 +740,7 @@
                 }
                 ,dataType:'json'
                 ,success: function(data){
-                    alert("check your email address");
+                    $('.modal-content').removeClass('loader');
                 },error: function(data){
                     console.log(data);
                 }

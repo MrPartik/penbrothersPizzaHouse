@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RPizzaTypesTableseed_Seeder::class);
         $this->call(RPizzaInformationTableseed_Seeder::class);
         $this->call(TToppingsTableseed_Seeder::class);
+        $this->call(TPizzaTableSeeder::class);
     }
 }
