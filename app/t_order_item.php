@@ -22,14 +22,14 @@ class t_order_item extends Model
 {
     /**
      * The primary key for the model.
-     * 
+     *
      * @var string
      */
     protected $primaryKey = 'oi_id';
 
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -37,7 +37,7 @@ class t_order_item extends Model
     /**
      * @var array
      */
-    protected $fillable = ['o_id', 'p_id', 'oi_sizeCombination', 'oi_pizaCombination', 'oi_toppings', 'oi_qty', 'stats', 'created_at', 'updated_at'];
+    protected $fillable = ['o_id', 'p_id', 'oi_sizeCombination', 'oi_toppings','oi_pizaCombination', 'oi_toppings', 'oi_qty', 'stats', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

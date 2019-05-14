@@ -38,7 +38,7 @@ class mailer extends Controller
             Session::forget('verify');
         }
 
-        return json_encode(array('success',$order->count()));
+        return json_encode(array('success',($order->count())?'ok':'not'));
     }
 
     function sendConfirm(Request $request){
@@ -92,14 +92,16 @@ class mailer extends Controller
             $order->o_delivered_at =  null;
             if($order->save()){
 
-                $orders = new t_order_item();
                 foreach($cart as $id => $val){
+
+                    $orders = new t_order_item();
                     $orders->o_id = $order->o_id;
                     $orders->p_id = $val["pizzaID"];
                     $orders->oi_sizeCombination = $val["customSID"];
                     $orders->oi_pizaCombination = implode(',',(array)$val["customPIDs"]);
                     $orders->oi_toppings = implode(',',(array)$val["toppingsIDs"]);
                     $orders->oi_qty = $val["qty"];
+                    $orders->oi_totalAmount = $val["total"];
                     $orders->save();
                 }
 

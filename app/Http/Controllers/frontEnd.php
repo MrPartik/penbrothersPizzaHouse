@@ -9,6 +9,7 @@ use App\r_pizza_type;
 use App\t_pizza;
 use App\t_pizza_custom;
 use App\t_topping;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -141,5 +142,40 @@ class frontEnd extends Controller
         }
 
         return view('pages.frontend-shop.product-details',compact('pizzaInfos','getProd','toppings','pizzas','sizeToppings'));
+    }
+
+    function registerPizzaHouse(Request $request){
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role = "user";
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->password = bcrypt($request->password_confirmation);
+
+        if($user->save()){
+            $account = array(
+                "ID" =>  $user->name
+            ,"NAME" => $user->name
+            ,"EMAIL" => $user->email
+            ,"PHONE" => $user->phone
+            ,"HOMENO" => ""
+            ,"STREET" => ""
+            ,"ZIPCODE" => ""
+            ,"PROV" => ""
+            ,"CITY" => ""
+            ,"BRGY" => ""
+            ,"ADDRESS" => $user->address
+            ,"LANDMARK" => ""
+            ,"GUEST" => false
+
+            );
+            Session::put('pizzaHouseAccount', $account);
+        }
+
+
+
+
+        return redirect()->back();
     }
 }

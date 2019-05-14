@@ -19,6 +19,7 @@ class CreateTOrderItemsTable extends Migration {
 			$table->bigInteger('p_id')->unsigned()->nullable()->index('p_id');
 			$table->integer('oi_sizeCombination')->unsigned()->default(1);
 			$table->string('oi_pizaCombination', 100)->nullable();
+            $table->float('oi_totalAmount', 10)->nullable();
 			$table->string('oi_toppings', 100)->nullable();
 			$table->integer('oi_qty')->unsigned()->default(1);
 			$table->boolean('stats')->default(1);

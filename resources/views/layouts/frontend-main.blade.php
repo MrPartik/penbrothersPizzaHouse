@@ -87,8 +87,10 @@
             <div class="container">
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{url('register')}}"><i class="fa fa-user-plus"></i> Sign Up</a></li>
-                        <li><a href="{{url('login')}}"><i class="fa fa-user"></i> Sign In</a></li>
+                        <li><a href="{{url('registerUser')}}"><i class="fa fa-user-plus"></i> Sign Up</a></li>
+                        <li>
+                            <a href="{{url('login')}}"><i class="fa fa-user"></i>{{(\Illuminate\Support\Facades\Auth::check())?' Admin':' Sign In'}}</a>
+                        </li>
                         <li><a href="#"><i class="fa fa-phone"></i> Customer Care</a></li>
                         <li><a href="#"><i class="fa fa-arrow-circle-down"></i> Order Tracker</a></li>
                         <li><a href="#"><i class="fa fa-truck"></i> Order Now</a></li>
@@ -693,13 +695,18 @@
                 }
                 ,dataType:'json'
                 ,success: function(data){
-                   if(data.success=="1"){
+                    console.log(data);
+                    console.log(data.success);
+                   if(data[1]=="ok"){
+
                        alert("Your order has been verified, please wait for your pizza to arrive");
                        $('.modal-content').removeClass('loader');
+                       window.location.reload();
                    }else{
                        alert("Please confirm your verification code");
                        $("#verify").val("");
                        $('.modal-content').removeClass('loader');
+
                    }
 
                 },error: function(data){

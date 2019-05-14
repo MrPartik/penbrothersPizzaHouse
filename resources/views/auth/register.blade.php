@@ -8,7 +8,7 @@
     <div class="register register-with-news-feed">
         <!-- begin news-feed -->
         <div class="news-feed">
-            <div class="news-image" style="background-image:url({{asset('assets/img/pizza/pizza2-unsplash.jpg')}})"></div>
+            <div class="news-image" style="background-image:url({{asset('assets/img/pizza/pizza1-unsplash.jpg')}})"></div>
             <div class="news-caption">
                 <a href="{{url('/')}}"><h4 class="caption-title"><b>Pizza</b>House</h4></a>
 
@@ -25,7 +25,7 @@
             <!-- end register-header -->
             <!-- begin register-content -->
             <div class="register-content">
-                <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+                <form method="POST" action="{{ url('registerUser') }}" aria-label="{{ __('Register') }}">
                     @csrf
                     <label class="control-label">Full Name <span class="text-danger">*</span></label>
                     <div class="row row-space-10">
