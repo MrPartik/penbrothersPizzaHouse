@@ -11,9 +11,11 @@ use App\t_pizza_custom;
 use App\t_topping;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Krlove\EloquentModelGenerator\Model\EloquentModel;
+use phpDocumentor\Reflection\Types\Null_;
 
 class frontEnd extends Controller
 {
@@ -32,7 +34,7 @@ class frontEnd extends Controller
 
     function loginPizzaHouse(Request $request){
         $account = array(
-            "ID" => uniqid()
+            "ID" => null
             ,"NAME" => $request->name
             ,"EMAIL" => $request->email
             ,"PHONE" => $request->phone
@@ -44,13 +46,37 @@ class frontEnd extends Controller
             ,"BRGY" => $request->get('brgySelect')
             ,"ADDRESS" => $request->address
             ,"LANDMARK" => $request->landmark
-            ,"GUEST" => true
+            ,"GUEST" => uniqid()
 
         );
         Session::get('pizzaHouseAccount');
         Session::put('pizzaHouseAccount', $account);
         return redirect()->back();
     }
+
+     function loginPizzaHouseExisting(Request $request){
+        if(Auth::attempt(array('email' => $request->email, 'password' => $request->password))){
+            $account = array(
+             "ID" => Auth::user()->id
+            ,"NAME" => Auth::user()->name
+            ,"EMAIL" => Auth::user()->email
+            ,"PHONE" => Auth::user()->phone
+            ,"HOMENO" => $request->homeno
+            ,"STREET" => $request->street
+            ,"ZIPCODE" => $request->zipcode
+            ,"PROV" => $request->get('provSelect')
+            ,"CITY" => $request->get('citySelect')
+            ,"BRGY" => $request->get('brgySelect')
+            ,"ADDRESS" => Auth::user()->address
+            ,"LANDMARK" => $request->landmark
+            );
+
+            Session::get('pizzaHouseAccount');
+            Session::put('pizzaHouseAccount', $account);
+        }
+
+        return redirect()->back();
+        }
 
     function addToCart(Request $request){
         $cartVal  = json_decode($request->cartVal)[0];

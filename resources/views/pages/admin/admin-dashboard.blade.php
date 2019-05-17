@@ -112,7 +112,7 @@
 
     <script>
 
-        $.getJSON('{{url('/salesJSON')}}',function(data){
+        $.getJSON('{{url('/orderSalesJSON')}}',function(data){
 
             Highcharts.stockChart('stockGraph', {
 

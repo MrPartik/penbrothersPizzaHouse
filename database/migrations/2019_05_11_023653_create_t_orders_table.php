@@ -16,6 +16,7 @@ class CreateTOrdersTable extends Migration {
 		{
 			$table->bigInteger('o_id', true)->unsigned();
 			$table->bigInteger('u_id')->unsigned()->nullable()->index('u_id');
+            $table->string('o_guest_id', 50)->nullable();
 			$table->string('o_transCode', 50);
 			$table->string('o_payTransCode', 50)->nullable();
 			$table->string('o_payID', 50)->nullable();

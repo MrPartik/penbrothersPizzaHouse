@@ -203,10 +203,10 @@
                                     </div>
                                     <div class="cart-footer">
                                         <div class="row row-space-10">
-                                            <div class="col-xs-6">
-                                                <a href="checkout_cart.html" class="btn btn-default btn-block">View Cart</a>
-                                            </div>
-                                            <div class="col-xs-6">
+                                            {{--<div class="col-xs-6">--}}
+                                                {{--<a href="checkout_cart.html" class="btn btn-default btn-block">View Cart</a>--}}
+                                            {{--</div>--}}
+                                            <div class="col-xs-12">
                                                 <a data-backdrop="static" data-keyboard="false" id=cartCheckout href="#checkout" data-toggle="modal" class="btn btn-inverse btn-block">Checkout</a>
                                             </div>
                                         </div>
@@ -360,8 +360,9 @@
                         <center>
                             <div class="col-md-12">
                                 <div class="col-md-6">
-                                    <a href="{{url('login')}}">
-                                        <div style="color: #6f6f6f;width: 100%;height: 250px;border: 1px gray solid;border-radius: 10px;"">
+                                    <a href="#existingTab" data-toggle="modal" onclick="$('#loginGuest').modal('toggle')">
+
+                                    <div style="color: #6f6f6f;width: 100%;height: 250px;border: 1px gray solid;border-radius: 10px;">
                                             <i class="fa fa-user" style="font-size: 150px; padding-top:10%"></i>
                                             <br>
                                             <label >Please Login me, I want to use my existing data.</label>
@@ -422,15 +423,15 @@
                         <br>
                         <div class="form-group col-md-3">
                             <span>* Home No.</span>
-                            <input class="form form-control" name="homeno" type="text" required/>
+                            <input class="form form-control" name="homeno" id="homeno" type="text" required/>
                         </div>
                         <div class="form-group col-md-6">
                             <span>* Street.</span>
-                            <input class="form form-control" name="street" type="text" required/>
+                            <input class="form form-control" name="street" id="street" type="text" required/>
                         </div>
                         <div class="form-group col-md-3">
                             <span>Zip Code</span>
-                            <input class="form form-control" name="zipcode" type="text" required/>
+                            <input class="form form-control" name="zipcode" id="zipcode" type="text" required/>
                         </div>
                         <div class="form-group col-md-6">
                             <span>* Province</span>
@@ -461,6 +462,75 @@
                     <a href="javascript:;" class="btn btn-outline-danger" onclick="$('#loginGuest').modal('toggle'); $('#guestTab').modal('toggle');"> <i class="fa fa-arrow-left"></i> Back</a>
                     <button  class="btn btn-success" type="submit"> <i class="fa fa-send"></i> Submit</button>
                 </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade in" id="existingTab" >
+        <div class="modal-dialog" style="width: 500px;">
+            <div class="modal-content" style="
+    border-radius: 10px;
+">
+                <div class="modal-header" style="background: #6f6f6f;color: white;height: 70px;border-radius: 10px;">
+                    <h4 class="modal-title">PizzaHouse - Order as Existing User </h4>
+                    <p class="modal-description">Fillout the form below to continue ordering</p>
+                </div>
+                <form method="POST" action="{{url('loginPizzaHouseExisting')}}">
+                    {{csrf_field()}}
+                    <div class="modal-body">
+                        <div class="row" style="height: 450px;overflow: hidden auto;padding: 20px;">
+
+                            <div class="form-group col-md-12">
+                                <span>* Email</span>
+                                <input class="form form-control" name="email" type="email" required/>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <span>* Password</span>
+                                <input class="form form-control" name="password"  type="password" required/>
+                            </div>
+
+                            <label>Delivery Details</label>
+                            <br>
+                            <div class="form-group col-md-3">
+                                <span>* Home No.</span>
+                                <input class="form form-control" name="homeno" id="homeno" type="text" required/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <span>* Street.</span>
+                                <input class="form form-control" name="street" id="street" type="text" required/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <span>Zip Code</span>
+                                <input class="form form-control" name="zipcode" id="zipcode" type="text" required/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <span>* Province</span>
+                                <select class="form form-control" id="provSelect" name="provSelect" style="width:100%;" required></select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <span>* City /Municipality</span>
+                                <select class="form form-control" id="citySelect" style="width:100%;" name="citySelect" required></select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <span>* Barangay</span>
+                                <select  class="form form-control" id="brgySelect" name="brgySelect" style="width:100%;" required></select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <span>* Edit Address </span>
+                                <textarea  class="form form-control" id="address" name="address" style="width:100%;" required></textarea>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <span>LandMark </span>
+                                <textarea  class="form form-control" id="landmark" name="landmark" style="width:100%;" required></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-outline-danger" onclick="$('#loginGuest').modal('toggle'); $('#existingTab').modal('toggle');"> <i class="fa fa-arrow-left"></i> Back</a>
+                        <button  class="btn btn-success" type="submit"> <i class="fa fa-send"></i> Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -619,43 +689,43 @@
     <script>
         $.getJSON('{{asset('forMapping/refprovince.json')}}', function(prov) {
             $.each(prov.RECORDS,function(id,item){
-                $('#provSelect').append("<option value="+item.provCode+">"+item.provDesc+"</option>");
+                $('select[id=provSelect]').append("<option value="+item.provCode+">"+item.provDesc+"</option>");
             });
 
-            $('#provSelect').trigger('change');
+            $('select[id=provSelect]').trigger('change');
 
         });
 
-        $('#provSelect').on('change',function(){
+        $('select[id=provSelect]').on('change',function(){
             $prov = $(this);
             $.getJSON('{{asset('forMapping/refcitymun.json')}}', function(cities) {
                 city =$.grep( cities.RECORDS, function( n, i ) {
                     return n.provCode==$prov.val();
                 });
-                $('#citySelect').html(" ");
+                $('select[id=citySelect]').html(" ");
                 $.each(city,function(id,item){
-                    $('#citySelect').append("<option value="+item.citymunCode+">"+item.citymunDesc+"</option>");
+                    $('select[id=citySelect]').append("<option value="+item.citymunCode+">"+item.citymunDesc+"</option>");
                 });
 
             });
-            $('#citySelect').trigger('change');
+            $('select[id=citySelect]').trigger('change');
             setAddress();
         });
 
-        $('#citySelect').on('change',function(){
+        $('select[id=citySelect]').on('change',function(){
             $city = $(this);
             $.getJSON('{{asset('forMapping/refbrgy.json')}}', function(brgys) {
                 console.log($city.val());
                 brgy =$.grep( brgys.RECORDS, function( n, i ) {
                     return n.citymunCode==$city.val();
                 });
-                $('#brgySelect').html(" ");
+                $('select[id=brgySelect]').html(" ");
                 $.each(brgy,function(id,item){
-                    $('#brgySelect').append("<option value="+item.brgyCode+">"+item.brgyDesc+"</option>");
+                    $('select[id=brgySelect]').append("<option value="+item.brgyCode+">"+item.brgyDesc+"</option>");
                 });
 
             });
-            $('#brgySelect').trigger('change');
+            $('select[id=brgySelect]').trigger('change');
             setAddress();
         });
 
@@ -763,18 +833,17 @@
         $("input[name='zipcode']").on('keyup',function(){
             setAddress();
         });
-        $('#brgySelect').on('change',function(){
+        $('select[id=brgySelect]').on('change',function(){
             setAddress();
         });
         function setAddress(){
-
             setTimeout(function(){
-                $('#address').text($("input[name='homeno']").val()+", "
-                    +$("input[name='street']").val()+", "
-                    +$('#brgySelect option:selected').text()+", "
-                    +$('#citySelect option:selected').text()+", "
-                    +$('#provSelect option:selected').text()+", "
-                    +$("input[name='zipcode']").val());
+                $('textarea[id=address]').text($("input[id='homeno']").val()+", "
+                    +$("input[id='street']").val()+", "
+                    +$('select[id=brgySelect] option:selected').text()+", "
+                    +$('select[id=citySelect] option:selected').text()+", "
+                    +$('select[id=provSelect] option:selected').text()+", "
+                    +$("input[id='zipcode']").val());
             },1000);
         }
         $('select').select2();

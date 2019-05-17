@@ -65,7 +65,8 @@ class mailer extends Controller
 
         }else{
             $order = new t_order();
-            $order->u_id = ($account['GUEST'])?$account['GUEST']:$account['ID'];
+            $order->u_id = (is_null($account['GUEST']))?$account['ID']:null;
+            $order->o_guest_id = (is_null($account['GUEST']))?'':$account['GUEST'];
             $order->o_transCode = uniqid();
             $order->o_payTransCode = null;
             $order->o_payID = null;
