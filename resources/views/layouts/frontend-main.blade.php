@@ -213,6 +213,7 @@
                                     </div>
                                 </div>
                             </li>
+                            @if(!is_null($account))
                             <li class="divider"></li>
                             <li class="{{(!is_null($account))?'dropdown dropdown-hover':''}}" >
                                 <a href="{{(!is_null($account))?'javascript:;':'#loginGuest'}}" {{(is_null($account))?'data-toggle=modal':'data-toggle=dropdown'}} >
@@ -224,7 +225,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-cart p-0">
                                     <div class="cart-header">
-                                        <h4 class="cart-title">Information - {{$account['ID']}} </h4>
+                                        <h4 class="cart-title">Information - {{@$account['ID']}} </h4>
                                     </div>
                                     <div class="cart-body">
                                         <ul class="cart-item">
@@ -260,6 +261,7 @@
                                     </span>
                                     </a>
                                 </li>
+                            @endif
                             @endif
 
                         </ul>
