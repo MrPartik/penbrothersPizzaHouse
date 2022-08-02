@@ -114,8 +114,8 @@ class PackageManifest
 
         if ($this->files->exists($path = $this->vendorPath.'/composer/installed.json')) {
             $installed = json_decode($this->files->get($path), true);
-$packages = $installed['packages'] ?? $installed;
-            // $packages = json_decode($this->files->get($path), true);
+
+            $packages = $installed['packages'] ?? $installed;
         }
 
         $ignoreAll = in_array('*', $ignore = $this->packagesToIgnore());
